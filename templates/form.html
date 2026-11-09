@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<h1>{{ title }}</h1>
+
+<form class="emp-form" method="post">
+  <label>First name *
+    <input type="text" name="first_name" value="{{ data.first_name }}" required>
+  </label>
+  <label>Last name *
+    <input type="text" name="last_name" value="{{ data.last_name }}" required>
+  </label>
+  <label>Email *
+    <input type="email" name="email" value="{{ data.email }}" required>
+  </label>
+  <label>Phone
+    <input type="tel" name="phone" value="{{ data.phone }}">
+  </label>
+  <label>Department *
+    <select name="department" required>
+      <option value="">-- Select --</option>
+      {% for d in departments %}
+        <option value="{{ d }}" {% if d == data.department %}selected{% endif %}>{{ d }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Designation
+    <input type="text" name="designation" value="{{ data.designation }}">
+  </label>
+  <label>Date of joining
+    <input type="date" name="date_of_joining" value="{{ data.date_of_joining }}">
+  </label>
+  <label>Salary
+    <input type="number" name="salary" step="0.01" min="0" value="{{ data.salary }}">
+  </label>
+  <div class="form-actions">
+    <button type="submit">Save</button>
+    <a href="{{ url_for('index') }}">Cancel</a>
+  </div>
+</form>
+{% endblock %}
